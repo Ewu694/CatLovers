@@ -1,42 +1,51 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+h1 {
+  color: #EF7C8E;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.form-container {
+  background-color: #EED6D3;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.card {
-  padding: 2em;
+.form input {
+  margin: 10px 0;
+  padding: 15px;
+  width: 210px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: #67595E;
 }
 
-.read-the-docs {
-  color: #888;
+.form button {
+  margin-top: 10px;
+  padding: 12px 15px;
+  width: 210px;
+  background-color: #B6E2D3;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.form p {
+  margin-top: 10px;
+  color: #D8A7B1;
+  cursor: pointer;
+}
+
+.buttonTextColor {
+  color: #FFFFFF;
 }

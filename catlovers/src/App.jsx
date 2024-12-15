@@ -1,35 +1,47 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from 'react';
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [isLogin, setIsLogin] = useState(true);
+
+  const toggleForm = () => {
+    setIsLogin(!isLogin);
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div className="form-container">
+        {isLogin ? (
+          <LoginForm toggleForm={toggleForm} />
+        ) : (
+          <CreateAccountForm toggleForm={toggleForm} />
+        )}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+  );
 }
 
-export default App
+function LoginForm({ toggleForm }) {
+  return (
+    <div className="form">
+      <h1>Cat Lovers</h1>
+      <input type="text" placeholder="Username" />
+      <input type="password" placeholder="Password" />
+      <button>Login</button>
+      <p onClick={toggleForm}>Create Account</p>
+    </div>
+  );
+}
+
+function CreateAccountForm({ toggleForm }) {
+  return (
+    <div className="form">
+      <h1>Cat Lovers</h1>
+      <input type="text" placeholder="Username" />
+      <input type="password" placeholder="Password" />
+      <input type="password" placeholder="Confirm Password" />
+      <button>Create Account</button>
+      <p onClick={toggleForm}>Login</p>
+    </div>
+  );
+}
+
+export default App;
