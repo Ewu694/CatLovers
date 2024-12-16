@@ -1,17 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function Login() {
   const [isLogin, setIsLogin] = useState(true);
-
-  const fetchCatAPI = async () => {
-    try {
-      const response = await axios.get('https://cataas.com/cat');
-      console.log(response);
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
   const toggleForm = () => {
     setIsLogin(!isLogin);
