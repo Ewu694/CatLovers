@@ -1,8 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
+import axios from 'axios';
 
 function App() {
   const [isLogin, setIsLogin] = useState(true);
+
+  const fetchCatAPI = async () => {
+    try {
+      const response = await axios.get('https://cataas.com/cat');
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const toggleForm = () => {
     setIsLogin(!isLogin);
