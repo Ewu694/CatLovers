@@ -1,47 +1,38 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
+import '../styles/styles.css';
 
 function Login() {
-  const [isLogin, setIsLogin] = useState(true);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const navigate = useNavigate();
 
-  const toggleForm = () => {
-    setIsLogin(!isLogin);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post('http://localhost:5173/login', { username, password });
+      if (response.status === 200) {
+        navigate('/cats');
+      } else {
+        setErrorMessage(response.data);
+      }
+    } catch (error) {
+      setErrorMessage('An error occurred: ' + (error.response ? error.response.data : error.message));
+    }
   };
 
   return (
-      <div className="form-container">
-        {isLogin ? (
-          <LoginForm toggleForm={toggleForm} />
-        ) : (
-          <CreateAccountForm toggleForm={toggleForm} />
-        )}
-      </div>
-  );
-}
-
-function LoginForm({ toggleForm }) {
-  return (
-    <div className="form">
-      <Link to='/'>
-        <h1>Cat Lovers</h1>
-      </Link>
-      <input type="text" placeholder="Username" />
-      <input type="password" placeholder="Password" />
-      <button>Login</button>
-      <p onClick={toggleForm}>Create Account</p>
-    </div>
-  );
-}
-
-function CreateAccountForm({ toggleForm }) {
-  return (
-    <div className="form">
-      <h1>Cat Lovers</h1>
-      <input type="text" placeholder="Username" />
-      <input type="password" placeholder="Password" />
-      <input type="password" placeholder="Confirm Password" />
-      <button>Create Account</button>
-      <p onClick={toggleForm}>Login</p>
+    <div className="form-container">
+      <Link to='/'><h1>Cat Lovers</h1></Link>
+      <form className="form" onSubmit={handleSubmit}>
+        <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
+        <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        <button type="submit">Login</button>
+        <Link to='/create-account'>Create Account</Link>
+      </form>
+      {errorMessage && <div className="error-message">{errorMessage}</div>}
     </div>
   );
 }

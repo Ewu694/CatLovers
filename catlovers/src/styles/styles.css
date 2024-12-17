@@ -8,24 +8,23 @@ html {
 }
 
 h1 {
-    color: #EF7C8E;
+  color: #EF7C8E;
 }
 
 .title {
-    color: #EF7C8E;
-    font-size: 150px;
+  color: #EF7C8E;
+  font-size: 150px;
 }
 
 .title-link {
-    color: #B6E2D3;
-    font-weight: bold;
-    font-size: 50px;
+  color: #B6E2D3;
+  font-weight: bold;
+  font-size: 50px;
 }
 
 .title-link:hover {
-    color: #D8A7B1;
+  color: #D8A7B1;
 }
-
 
 .title-container {
   display: flex;
@@ -36,49 +35,98 @@ h1 {
 }
 
 .form-container {
-background-color: #EED6D3;
-padding: 20px;
-border-radius: 10px;
-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-display: inline-block;
-position: absolute;
-top: 50%;
-left: 50%;
-transform: translate(-50%, -50%);
+  background-color: #EED6D3;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .form {
-display: flex;
-flex-direction: column;
-align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .form input {
-margin: 10px 0;
-padding: 15px;
-width: 210px;
-border: 1px solid #ccc;
-border-radius: 5px;
-background: #67595E;
+  margin: 10px 0;
+  padding: 15px;
+  width: 210px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: #67595E;
+  color: #fff;
+}
+
+.form input::placeholder {
+  color: #ccc;
 }
 
 .form button {
-margin-top: 10px;
-padding: 12px 15px;
-width: 210px;
-background-color: #B6E2D3;
-color: #fff;
-border: none;
-border-radius: 5px;
-cursor: pointer;
+  margin-top: 10px;
+  padding: 12px 15px;
+  width: 210px;
+  background-color: #B6E2D3;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.form button:hover {
+  background-color: #A5D1C5;
 }
 
 .form p {
-margin-top: 10px;
-color: #D8A7B1;
-cursor: pointer;
+  margin-top: 10px;
+  color: #D8A7B1;
+  cursor: pointer;
+}
+
+.form a {
+  margin-top: 10px;
+  color: #D8A7B1;
+  text-decoration: none;
+}
+
+.form a:hover {
+  color: #B8A7B1;
 }
 
 .buttonTextColor {
-color: #FFFFFF;
+  color: #FFFFFF;
+}
+
+.cat-container {
+  text-align: center;
+  padding: 20px;
+}
+
+.cat-image {
+  margin-top: 20px;
+  max-width: 100%;
+  max-height: 500px; /* Limit the height */
+  width: auto;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.button {
+  margin-top: 10px;
+  padding: 12px 15px;
+  width: 210px;
+  background-color: #B6E2D3;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #A5D1C5;
 }
