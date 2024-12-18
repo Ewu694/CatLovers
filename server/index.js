@@ -1,9 +1,12 @@
 import express from "express";
 import pg from "pg";
 import bodyParser from "body-parser";
+import cors from "cors";
 
 const app = express();
+app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(cors());
 
 const database = new pg.Client({
   user: "postgres",
@@ -17,28 +20,7 @@ database.connect()
   .then(() => console.log('Database connected successfully'))
   .catch(err => console.error('Database connection error:', err));
 
-let users = [];
-database.query('SELECT * FROM public.users', (err, res) => {
-    if (err) {
-        console.error('Error executing query', err.stack);
-    } else { 
-    users = res.rows;
-    console.log(users);
-    }
-    database.end();
-});
-
-app.get('/test-connection', async (req, res) => {
-  try {
-    const result = await database.query('SELECT NOW()');
-    res.status(200).send(`Database connected successfully: ${result.rows[0].now}`);
-  } catch (err) {
-    console.error('Error during test connection:', err);
-    res.status(500).send('An error occurred: ' + err.message);
-  }
-});
-
-app.post('/login', async (req, res) => {
+app.post('/api/login', async (req, res) => {
   const { username, password } = req.body;
   console.log('Login request received:', username);
 
@@ -46,6 +28,7 @@ app.post('/login', async (req, res) => {
     const result = await database.query('SELECT * FROM users WHERE username = $1 AND password = $2', [username, password]);
     if (result.rows.length > 0) {
       res.status(200).send('Login Successful'); // 200 for successful login
+      console.log(username, 'logged in successfully');
     } else {
       res.status(401).send('Invalid username or password'); // 401 for unauthorized
     }
@@ -55,7 +38,7 @@ app.post('/login', async (req, res) => {
   }
 });
 
-app.post('/create-account', async (req, res) => {
+app.post('/api/create-account', async (req, res) => {
   const { username, password } = req.body;
   console.log('Create account request received:', username);
 
@@ -75,6 +58,19 @@ app.post('/create-account', async (req, res) => {
   }
 });
 
-app.listen(5173, () => {
-  console.log('Server is running on http://localhost:5173');
+app.post('/cats', async (req, res) => {
+  const { imageUrl, userId } = req.body;
+  console.log('Favorite request received:', imageUrl);
+
+  try {
+    await database.query('UPDATE users SET FavoriteImage = $1 WHERE username = $2', [imageUrl, username]);
+    res.status(200).send('Image favorited successfully');
+  } catch (err) {
+    console.error('Error during favoriting image:', err);
+    res.status(500).send('An error occurred: ' + err.message); // 500 for server error
+  }
+});
+
+app.listen(3000, () => {
+  console.log('Server is running on http://localhost:3000/');
 });

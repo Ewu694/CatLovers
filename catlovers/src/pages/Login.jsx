@@ -12,7 +12,7 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5173/login', { username, password });
+      const response = await axios.post('http://localhost:5173/api/login', { username, password });
       if (response.status === 200) {
         navigate('/cats');
       } else {

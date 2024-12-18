@@ -17,7 +17,7 @@ function CreateAccount() {
       return;
     }
     try {
-      const response = await axios.post('http://localhost:5173/create-account', { username, password });
+      const response = await axios.post('http://localhost:5173/api/create-account', { username, password });
       if (response.status === 201) {
         navigate('/cats');
       } else {

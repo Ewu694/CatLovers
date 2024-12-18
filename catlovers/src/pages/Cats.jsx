@@ -5,9 +5,11 @@ import '../styles/styles.css';
 const Cats = () => {
   const [catImageUrl, setCatImageUrl] = useState('');
   const [loading, setLoading] = useState(false);
+  const [favoriteMessage, setFavoriteMessage] = useState('');
 
   const fetchCatImage = async () => {
     setLoading(true);
+    setFavoriteMessage('');
     try {
       const response = await axios.get('https://api.thecatapi.com/v1/images/search');
       const imageUrl = response.data[0].url;
@@ -16,6 +18,16 @@ const Cats = () => {
       console.error('Error fetching cat image:', error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const favoriteCatImage = async () => {
+    try {
+      const response = await axios.post('http://localhost:5173/cats', { imageUrl: catImageUrl, userId: 123 });
+      setFavoriteMessage(response.data);
+    } catch (error) {
+      console.error('Error favoriting cat image:', error);
+      setFavoriteMessage('An error occurred while favoriting the image.');
     }
   };
 
@@ -40,6 +52,12 @@ const Cats = () => {
       <button onClick={fetchCatImage} className='button'>
         {loading ? "Loading..." : "Get Cat Image"}
       </button>
+      {catImageUrl && (
+        <button onClick={favoriteCatImage} className='button' style={{ marginLeft: "10px" }}>
+          Favorite
+        </button>
+      )}
+      {favoriteMessage && <p>{favoriteMessage}</p>}
     </div>
   );
 };
